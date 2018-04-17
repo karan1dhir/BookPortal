@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DepartmentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Department.dbo.tblBookDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblBookDetail">
+    <Key>
+      <PropertyRef Name="BookId" />
+      <PropertyRef Name="BookName" />
+      <PropertyRef Name="BookAuthor" />
+      <PropertyRef Name="BookPrice" />
+      <PropertyRef Name="BookQuantity" />
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="BookId" Type="int" Nullable="false" />
+    <Property Name="BookName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookAuthor" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookPrice" Type="int" Nullable="false" />
+    <Property Name="BookQuantity" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblCartDetail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookPrice" Type="int" Nullable="false" />
+    <Property Name="BookQuantityUser" Type="int" Nullable="false" />
+    <Property Name="BookUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblDepartment">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="ProductType" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblUserDetails">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tblBookDetail_tblDepartment">
+    <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="1" />
+    <End Role="tblBookDetail" Type="Self.tblBookDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDepartment">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="tblBookDetail">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DepartmentModelStoreContainer">
+    <EntitySet Name="tblCartDetail" EntityType="Self.tblCartDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDepartment" EntityType="Self.tblDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserDetails" EntityType="Self.tblUserDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBookDetail" EntityType="Self.tblBookDetail" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblBookDetail].[BookId] AS [BookId], 
+    [tblBookDetail].[BookName] AS [BookName], 
+    [tblBookDetail].[BookAuthor] AS [BookAuthor], 
+    [tblBookDetail].[BookPrice] AS [BookPrice], 
+    [tblBookDetail].[BookQuantity] AS [BookQuantity], 
+    [tblBookDetail].[id] AS [id]
+    FROM [dbo].[tblBookDetail] AS [tblBookDetail]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_tblBookDetail_tblDepartment" Association="Self.FK_tblBookDetail_tblDepartment">
+      <End Role="tblDepartment" EntitySet="tblDepartment" />
+      <End Role="tblBookDetail" EntitySet="tblBookDetail" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DepartmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblCartDetail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookPrice" Type="Int32" Nullable="false" />
+    <Property Name="BookQuantityUser" Type="Int32" Nullable="false" />
+    <Property Name="BookUserId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblDepartment">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tblBookDetails" Relationship="Self.FK_tblBookDetail_tblDepartment" FromRole="tblDepartment" ToRole="tblBookDetail" />
+  </EntityType>
+  <EntityType Name="tblUserDetail">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBookDetail">
+    <Key>
+      <PropertyRef Name="BookId" />
+      <PropertyRef Name="BookName" />
+      <PropertyRef Name="BookAuthor" />
+      <PropertyRef Name="BookPrice" />
+      <PropertyRef Name="BookQuantity" />
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="BookId" Type="Int32" Nullable="false" />
+    <Property Name="BookName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookPrice" Type="Int32" Nullable="false" />
+    <Property Name="BookQuantity" Type="Int32" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="tblDepartment" Relationship="Self.FK_tblBookDetail_tblDepartment" FromRole="tblBookDetail" ToRole="tblDepartment" />
+  </EntityType>
+  <Association Name="FK_tblBookDetail_tblDepartment">
+    <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="1" />
+    <End Role="tblBookDetail" Type="Self.tblBookDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDepartment">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="tblBookDetail">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DepartmentEntitiesDbCon" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblCartDetails" EntityType="Self.tblCartDetail" />
+    <EntitySet Name="tblDepartments" EntityType="Self.tblDepartment" />
+    <EntitySet Name="tblUserDetails" EntityType="Self.tblUserDetail" />
+    <EntitySet Name="tblBookDetails" EntityType="Self.tblBookDetail" />
+    <AssociationSet Name="FK_tblBookDetail_tblDepartment" Association="Self.FK_tblBookDetail_tblDepartment">
+      <End Role="tblDepartment" EntitySet="tblDepartments" />
+      <End Role="tblBookDetail" EntitySet="tblBookDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DepartmentModelStoreContainer" CdmEntityContainer="DepartmentEntitiesDbCon">
+    <EntitySetMapping Name="tblCartDetails">
+      <EntityTypeMapping TypeName="DepartmentModel.tblCartDetail">
+        <MappingFragment StoreEntitySet="tblCartDetail">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="BookName" ColumnName="BookName" />
+          <ScalarProperty Name="BookPrice" ColumnName="BookPrice" />
+          <ScalarProperty Name="BookQuantityUser" ColumnName="BookQuantityUser" />
+          <ScalarProperty Name="BookUserId" ColumnName="BookUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDepartments">
+      <EntityTypeMapping TypeName="DepartmentModel.tblDepartment">
+        <MappingFragment StoreEntitySet="tblDepartment">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserDetails">
+      <EntityTypeMapping TypeName="DepartmentModel.tblUserDetail">
+        <MappingFragment StoreEntitySet="tblUserDetails">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBookDetails">
+      <EntityTypeMapping TypeName="DepartmentModel.tblBookDetail">
+        <MappingFragment StoreEntitySet="tblBookDetail">
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="BookName" ColumnName="BookName" />
+          <ScalarProperty Name="BookAuthor" ColumnName="BookAuthor" />
+          <ScalarProperty Name="BookPrice" ColumnName="BookPrice" />
+          <ScalarProperty Name="BookQuantity" ColumnName="BookQuantity" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
